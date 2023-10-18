@@ -81,3 +81,48 @@
 //     console.log(isi)
 //     p.innerHTML = isi
 // })
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("kalimat-form");
+    const input = document.getElementById("kalimat-input");
+    const list = document.getElementById("kalimat-list");
+  
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      const kalimatText = input.value.trim();
+  
+      if (kalimatText === "") {
+        alert("Silakan masukkan kalimat terlebih dahulu.");
+        return;
+      }
+  
+      const listItem = document.createElement("li");
+      const checkbox = document.createElement("input");
+      const deleteButton = document.createElement("button");
+  
+      checkbox.type = "checkbox";
+      checkbox.style.marginRight = "10px"
+      checkbox.addEventListener("change", function () {
+        if (checkbox.checked) {
+          listItem.style.textDecoration = "line-through";
+        } else {
+          listItem.style.textDecoration = "none";
+        }
+      });
+  
+      deleteButton.innerText = "X";
+      deleteButton.style.marginLeft = "10px"
+      deleteButton.addEventListener("click", function () {
+        listItem.remove();
+      });
+  
+      listItem.appendChild(checkbox);
+      listItem.appendChild(document.createTextNode(kalimatText));
+      listItem.appendChild(deleteButton);
+      list.appendChild(listItem);
+  
+      input.value = "";
+    });
+  });
+  
